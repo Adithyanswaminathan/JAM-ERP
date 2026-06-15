@@ -1,10 +1,16 @@
 package com.tatastrive.erp.JAM.Enterprises.Entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "employees")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Employee {
 
     @Id
@@ -29,8 +35,6 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    // Constructors
     public Employee() {}
-
     // Getters and Setters
 }
