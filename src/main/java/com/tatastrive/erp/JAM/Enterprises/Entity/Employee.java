@@ -35,6 +35,6 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    public Employee() {}
+
     // Getters and Setters
 }
