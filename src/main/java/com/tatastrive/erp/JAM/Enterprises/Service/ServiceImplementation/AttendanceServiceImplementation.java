@@ -11,14 +11,18 @@ import java.util.List;
 @Service
 public class AttendanceServiceImplementation implements AttendanceService {
     @Autowired
-    private AttendanceRepository repository;
+    private AttendanceRepository attendanceRepository;
     @Override
     public Attendance saveAttendance(Attendance attendance){
-        return repository.save(attendance);
+        return attendanceRepository.save(attendance);
     }
     @Override
     public List<Attendance> getAllAttendance(){
-        return repository.findAll();
+        return attendanceRepository.findAll();
+    }
+    @Override
+    public Attendance getAttendanceById(Long id){
+        return attendanceRepository.findById(id).orElse(null);
     }
 
 }
