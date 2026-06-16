@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @RequiredArgsConstructor
 public class PayRoll
 {
