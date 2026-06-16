@@ -15,12 +15,12 @@ public class PayRollController
 {
     @Autowired
     private PayRollService payRollService;
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<PayRoll> generatePayroll(@RequestBody PayRoll payroll) {
         return new ResponseEntity<>(payRollService.generatePayRoll(payroll),
                 HttpStatus.CREATED);
     }
-    @GetMapping
+    @GetMapping("/getAll")
     public ResponseEntity<List<PayRoll>> getAllPayrolls() {
         return ResponseEntity.ok(payRollService.getAllPayRolls());
     }
