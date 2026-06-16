@@ -2,7 +2,7 @@ package com.tatastrive.erp.JAM.Enterprises.Controller;
 
 import java.util.List;
 
-import com.tatastrive.erp.JAM.Enterprises.Service.LeaveRequestService;
+import com.tatastrive.erp.JAM.Enterprises.Service.ServiceImplementation.LeaveRequestImplimentation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import com.tatastrive.erp.JAM.Enterprises.Entity.LeaveRequest;
 public class LeaveRequestController {
 
     @Autowired
-    private LeaveRequestService leaveService;
+    private LeaveRequestImplimentation leaveService;
 
     // Apply leave
     @PostMapping
