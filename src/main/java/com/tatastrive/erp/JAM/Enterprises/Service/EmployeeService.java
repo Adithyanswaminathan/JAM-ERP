@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    Employee saveEmployee(Employee employee);
+    Employee createEmployee(Employee employee);
     List<Employee> getAllEmployees();
     Employee getEmployeeById(Long id);
     Employee updateEmployee(Long id, Employee employee);

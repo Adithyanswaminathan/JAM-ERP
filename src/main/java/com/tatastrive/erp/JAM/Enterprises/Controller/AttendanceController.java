@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/attendance")
 public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
@@ -19,5 +19,9 @@ public class AttendanceController {
     @GetMapping
     public List<Attendance>getAllAttendance(){
         return attendanceService.getAllAttendance();
+    }
+    @GetMapping("/{id}")
+    public Attendance getAttendanceById(@PathVariable Long id) {
+        return attendanceService.getAttendanceById(id);
     }
 }

@@ -6,4 +6,6 @@ public interface AttendanceService {
     Attendance saveAttendance(Attendance attendance);
 
     List<Attendance> getAllAttendance();
+
+    Attendance getAttendanceById(Long id);
 }
