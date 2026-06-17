@@ -2,6 +2,7 @@ package com.tatastrive.erp.JAM.Enterprises.Service.ServiceImplementation;
 
 import com.tatastrive.erp.JAM.Enterprises.Entity.LeaveRequest;
 import com.tatastrive.erp.JAM.Enterprises.Repository.DepartmentRepository;
+import com.tatastrive.erp.JAM.Enterprises.Repository.LeaveRequestRepository;
 import com.tatastrive.erp.JAM.Enterprises.Service.LeaveRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.List;
 public class LeaveRequestImplimentation implements LeaveRequestService {
 
     @Autowired
-    private DepartmentRepository.LeaveRequestRepoistory leaveRepository;
+    private LeaveRequestRepository leaveRepository;
 
     @Override
     public LeaveRequest applyLeave(LeaveRequest leaveRequest) {
