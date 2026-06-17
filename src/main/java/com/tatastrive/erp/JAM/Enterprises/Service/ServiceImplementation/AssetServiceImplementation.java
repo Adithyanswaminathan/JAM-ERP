@@ -1,6 +1,7 @@
 package com.tatastrive.erp.JAM.Enterprises.Service.ServiceImplementation;
 
 import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
+import com.tatastrive.erp.JAM.Enterprises.Repository.AssetRepository;
 import com.tatastrive.erp.JAM.Enterprises.Repository.AttendanceRepository;
 import com.tatastrive.erp.JAM.Enterprises.Service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public class AssetServiceImplementation implements AssetService {
     @Autowired
-    private AttendanceRepository.AssetRepository assetRepository;
+    private AssetRepository assetRepository;
 
 
 
