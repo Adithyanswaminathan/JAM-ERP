@@ -3,6 +3,7 @@ package com.tatastrive.erp.JAM.Enterprises.Controller;
 import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
 import com.tatastrive.erp.JAM.Enterprises.Response.ApiResponse;
 import com.tatastrive.erp.JAM.Enterprises.Service.AssetService;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.AssetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ private AssetService assetService;
     @PostMapping
     public ResponseEntity<ApiResponse> addAsset(@RequestBody Asset asset) {
         try {
-            Asset savedAsset = assetService.saveAsset(asset);
+            AssetDto savedAsset = assetService.saveAsset(asset);
 
             return ResponseEntity.status(CREATED)
                     .body(new ApiResponse("Asset Added Successfully", savedAsset));
@@ -39,7 +40,7 @@ private AssetService assetService;
             @RequestBody Asset asset) {
 
         try {
-            Asset updatedAsset = assetService.updateAsset(id, asset);
+            AssetDto updatedAsset = assetService.updateAsset(id, asset);
 
             return ResponseEntity.ok(
                     new ApiResponse("Asset Updated Successfully", updatedAsset)
@@ -53,7 +54,7 @@ private AssetService assetService;
     @GetMapping
     public ResponseEntity<ApiResponse> getAllAsset(){
         try {
-            List<Asset> assets= assetService.getAllAsset();
+            List<AssetDto> assets= assetService.getAllAsset();
             return ResponseEntity.ok(new ApiResponse("Sucess",assets));
         } catch (Exception e) {
             return ResponseEntity.status(NOT_FOUND)
@@ -63,7 +64,7 @@ private AssetService assetService;
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse> getAssetById(@PathVariable Long id) {
         try {
-            Asset asset = assetService.getAssetById(id);
+            AssetDto asset = assetService.getAssetById(id);
 
             return ResponseEntity.ok(
                     new ApiResponse("Asset Retrieved Successfully", asset)

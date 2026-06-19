@@ -4,24 +4,34 @@ import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
 import com.tatastrive.erp.JAM.Enterprises.Repository.AssetRepository;
 import com.tatastrive.erp.JAM.Enterprises.Repository.AttendanceRepository;
 import com.tatastrive.erp.JAM.Enterprises.Service.AssetService;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.AssetDto;
+import com.tatastrive.erp.JAM.Enterprises.mapper.AssetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
+
 @Service
 public class AssetServiceImplementation implements AssetService {
+
+    @Autowired
+    private AssetMapper assetMapper;
     @Autowired
     private AssetRepository assetRepository;
 
 
 
     @Override
-    public Asset saveAsset(Asset asset){
-       return assetRepository.save(asset);
-
+    public AssetDto saveAsset(Asset asset) {
+        Asset savedAsset = assetRepository.save(asset);
+        return assetMapper.toDTO(savedAsset);
     }
-    public Asset updateAsset(Long id, Asset asset) {
+
+
+    public AssetDto updateAsset(Long id, Asset asset) {
 
         Asset existingAsset = assetRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Asset Not Found"));
@@ -30,20 +40,29 @@ public class AssetServiceImplementation implements AssetService {
         existingAsset.setAssetType(asset.getAssetType());
         existingAsset.setEmployee(asset.getEmployee());
 
-        return assetRepository.save(existingAsset);
+        Asset updatedAsset = assetRepository.save(existingAsset);
+
+        return assetMapper.toDTO(updatedAsset);
     }
 
     @Override
-    public List<Asset> getAllAsset() {
-        return assetRepository.findAll();
+    public List<AssetDto> getAllAsset() {
+        return assetRepository.findAll()
+         .stream()
+                .map(assetMapper::toDTO)
+                .toList();
     }
 
-    public Asset getAssetById(Long id) {
-        return assetRepository.findById(id)
+    public AssetDto getAssetById(Long id) {
+        Asset asset = assetRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Asset Not Found"));
+        return assetMapper.toDTO(asset);
     }
 @Override
     public void deleteAsset(Long id) {
-     assetRepository.deleteById(id);
+    Asset asset = assetRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Asset Not Found"));
+
+    assetRepository.delete(asset);
 }
 }

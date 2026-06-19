@@ -1,14 +1,20 @@
 package com.tatastrive.erp.JAM.Enterprises.Service;
 
 import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.AssetDto;
 
 import java.util.List;
 
 public interface AssetService {
-    public Asset saveAsset(Asset asset);
-    public Asset updateAsset(Long id, Asset asset);
 
-    List<Asset> getAllAsset();
-public Asset getAssetById(Long id);
-    public void deleteAsset(Long id);
+    AssetDto saveAsset(Asset asset);
+
+    AssetDto updateAsset(Long id, Asset asset);
+
+    List<AssetDto> getAllAsset();
+
+    AssetDto getAssetById(Long id);
+
+    void deleteAsset(Long id);
 }
+
