@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -35,6 +36,7 @@ public class Employee {
     @JoinColumn(name = "department_id")
     private Department department;
 
-
-    // Getters and Setters
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true)
+     private List<Asset> assets;
+        // Getters and Setters
 }

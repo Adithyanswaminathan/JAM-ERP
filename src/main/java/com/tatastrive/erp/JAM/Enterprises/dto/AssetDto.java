@@ -1,4 +1,4 @@
-package com.tatastrive.erp.JAM.Enterprises.dto.assetdto;
+package com.tatastrive.erp.JAM.Enterprises.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

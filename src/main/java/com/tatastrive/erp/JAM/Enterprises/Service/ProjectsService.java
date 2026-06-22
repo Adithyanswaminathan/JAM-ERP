@@ -1,18 +1,21 @@
 package com.tatastrive.erp.JAM.Enterprises.Service;
 
 import com.tatastrive.erp.JAM.Enterprises.Entity.Projects;
+import com.tatastrive.erp.JAM.Enterprises.dto.ProjectsDto;
 
 import java.util.List;
 
 public interface ProjectsService {
 
-    Projects saveProjects(Projects projects);
+    ProjectsDto saveProjects(Projects projects);
 
-    List<Projects> getAllProjects();
+    List<ProjectsDto> getAllProjects();
 
-    Projects getProjectsById(Long id);
+    ProjectsDto getProjectsById(Long id);
 
-    Projects updateProject(Long id, Projects projects);
+    ProjectsDto updateProjects(Long id, Projects projects);
 
     void deleteProjects(Long id);
+
+
 }
