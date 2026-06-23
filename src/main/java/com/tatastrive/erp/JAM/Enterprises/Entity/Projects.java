@@ -34,5 +34,8 @@ public class Projects {
     )
     private List<Employee> employees;
 
+    public String getDescription() {
+        return null;
+    }
 }
 

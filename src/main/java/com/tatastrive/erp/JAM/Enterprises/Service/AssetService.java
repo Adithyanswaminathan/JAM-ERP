@@ -1,7 +1,7 @@
 package com.tatastrive.erp.JAM.Enterprises.Service;
 
 import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
-import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.AssetDto;
+import com.tatastrive.erp.JAM.Enterprises.dto.AssetDto;
 
 import java.util.List;
 
