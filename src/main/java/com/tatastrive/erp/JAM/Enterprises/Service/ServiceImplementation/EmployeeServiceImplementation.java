@@ -41,6 +41,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
             existingEmployee.setSalary(employee.getSalary());
             existingEmployee.setJoiningDate(employee.getJoiningDate());
             existingEmployee.setDepartment(employee.getDepartment());
+            existingEmployee.setAssets(employee.getAssets());
             return employeeRepository.save(existingEmployee);
         }
         return null;
