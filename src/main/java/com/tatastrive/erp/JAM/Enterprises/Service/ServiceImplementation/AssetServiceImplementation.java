@@ -2,8 +2,9 @@ package com.tatastrive.erp.JAM.Enterprises.Service.ServiceImplementation;
 
 import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
 import com.tatastrive.erp.JAM.Enterprises.Repository.AssetRepository;
+import com.tatastrive.erp.JAM.Enterprises.Repository.AttendanceRepository;
 import com.tatastrive.erp.JAM.Enterprises.Service.AssetService;
-import com.tatastrive.erp.JAM.Enterprises.dto.AssetDto;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.AssetDto;
 import com.tatastrive.erp.JAM.Enterprises.mapper.AssetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class AssetServiceImplementation implements AssetService {

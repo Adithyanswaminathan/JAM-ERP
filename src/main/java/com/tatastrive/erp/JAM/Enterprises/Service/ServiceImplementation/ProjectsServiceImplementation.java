@@ -1,11 +1,8 @@
 package com.tatastrive.erp.JAM.Enterprises.Service.ServiceImplementation;
 
-import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
 import com.tatastrive.erp.JAM.Enterprises.Entity.Projects;
 import com.tatastrive.erp.JAM.Enterprises.Repository.ProjectsRepository;
 import com.tatastrive.erp.JAM.Enterprises.Service.ProjectsService;
-import com.tatastrive.erp.JAM.Enterprises.dto.ProjectsDto;
-import com.tatastrive.erp.JAM.Enterprises.mapper.ProjectsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,38 +12,30 @@ import java.util.List;
 public class ProjectsServiceImplementation implements ProjectsService {
 
     @Autowired
-    private ProjectsMapper projectsMapper;
-    @Autowired
     private ProjectsRepository projectsRepository;
 
     @Override
-    public ProjectsDto saveProjects(Projects projects) {
-        Projects savedProjects = projectsRepository.save(projects);
-        return projectsMapper.toDTO(savedProjects);
+    public Projects saveProjects(Projects projects) {
+        return projectsRepository.save(projects);
     }
 
     @Override
-    public List<ProjectsDto> getAllProjects() {
-        return projectsRepository.findAll()
-                .stream()
-                .map(projectsMapper::toDTO)
-                .toList();
+    public List<Projects> getAllProjects() {
+        return projectsRepository.findAll();
     }
 
     @Override
-    public ProjectsDto getProjectsById(Long id) {
-      Projects projects = projectsRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Asset Not Found"));
-        return projectsMapper.toDTO(projects);
+    public Projects getProjectsById(Long id) {
+        return projectsRepository.findById(id).orElse(null);
     }
 
     @Override
-    public ProjectsDto updateProjects(Long id, Projects projects) {
+    public Projects updateProject(Long id, Projects projects) {
 
         Projects existingProject =
-                projectsRepository.findById(id).orElseThrow(() -> new RuntimeException("Project Not Found"));
+                projectsRepository.findById(id).orElse(null);
 
-
+        if (existingProject != null) {
 
             existingProject.setProjectName(projects.getProjectName());
             existingProject.setClientName(projects.getClientName());
@@ -56,18 +45,14 @@ public class ProjectsServiceImplementation implements ProjectsService {
             existingProject.setStatus(projects.getStatus());
             existingProject.setEmployees(projects.getEmployees());
 
-        Projects updatedProjects = projectsRepository.save(existingProject);
+            return projectsRepository.save(existingProject);
+        }
 
-        return projectsMapper.toDTO(updatedProjects);
+        return null;
     }
 
     @Override
     public void deleteProjects(Long id) {
-        Projects projects = projectsRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Project Not Found"));
-
-        projectsRepository.delete(projects);
+        projectsRepository.deleteById(id);
     }
-
-
 }

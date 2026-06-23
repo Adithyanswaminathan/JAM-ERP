@@ -3,7 +3,7 @@ package com.tatastrive.erp.JAM.Enterprises.Controller;
 import com.tatastrive.erp.JAM.Enterprises.Entity.Asset;
 import com.tatastrive.erp.JAM.Enterprises.Response.ApiResponse;
 import com.tatastrive.erp.JAM.Enterprises.Service.AssetService;
-import com.tatastrive.erp.JAM.Enterprises.dto.AssetDto;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.AssetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
