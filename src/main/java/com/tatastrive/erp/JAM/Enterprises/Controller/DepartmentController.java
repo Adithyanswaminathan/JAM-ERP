@@ -1,9 +1,10 @@
 package com.tatastrive.erp.JAM.Enterprises.Controller;
 
 
-import com.tatastrive.erp.JAM.Enterprises.Entity.Department;
-import com.tatastrive.erp.JAM.Enterprises.Entity.Employee;
 import com.tatastrive.erp.JAM.Enterprises.Service.DepartmentService;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.DepartmentRequest;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.DepartmentResponse;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.EmployeeDepResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +20,19 @@ public class DepartmentController
     private DepartmentService departmentService;
 
     @PostMapping
-    public ResponseEntity<Department> createDepartment(@RequestBody Department department)
+    public ResponseEntity<DepartmentResponse> createDepartment(@RequestBody DepartmentRequest departmentRequest)
     {
-        return new ResponseEntity<>(departmentService.createDepartment(department), HttpStatus.CREATED);
+        DepartmentResponse response = departmentService.createDepartment(departmentRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    @GetMapping("/all")
-    public ResponseEntity<List<Department>> getAllDepartments()
+
+    @GetMapping
+    public ResponseEntity<List<DepartmentResponse>> getAllDepartments()
     {
-        return new ResponseEntity<>(departmentService.getAllDepartments(), HttpStatus.OK);
+        return ResponseEntity.ok(departmentService.getAllDepartments());
     }
     @GetMapping("/{departmentId}/employees")
-    public ResponseEntity<List<Employee>> getEmployeesByDepartment(@PathVariable Long departmentId)
+    public ResponseEntity<List<EmployeeDepResponse>> getEmployeesByDepartment(@PathVariable Long departmentId)
     {
         return ResponseEntity.ok(departmentService.getEmployeesByDepartmentId(departmentId));
     }

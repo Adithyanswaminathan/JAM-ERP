@@ -1,14 +1,17 @@
 package com.tatastrive.erp.JAM.Enterprises.Service;
 
-import com.tatastrive.erp.JAM.Enterprises.Entity.Department;
 import com.tatastrive.erp.JAM.Enterprises.Entity.Employee;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.DepartmentRequest;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.DepartmentResponse;
+import com.tatastrive.erp.JAM.Enterprises.dto.assetdto.EmployeeDepResponse;
 
 
 import java.util.List;
 
 public interface DepartmentService
 {
-    Department createDepartment(Department department);
-    List<Department> getAllDepartments();
-    List<Employee> getEmployeesByDepartmentId(Long departmentId);
+    DepartmentResponse createDepartment(DepartmentRequest departmentRequest);
+    List<DepartmentResponse> getAllDepartments();
+    List<EmployeeDepResponse> getEmployeesByDepartmentId(Long id);
+
 }
