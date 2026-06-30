@@ -3,37 +3,52 @@ package com.tatastrive.erp.JAM.Enterprises.Service.ServiceImplementation;
 import com.tatastrive.erp.JAM.Enterprises.Entity.Employee;
 import com.tatastrive.erp.JAM.Enterprises.Repository.EmployeeRepository;
 import com.tatastrive.erp.JAM.Enterprises.Service.EmployeeService;
+import com.tatastrive.erp.JAM.Enterprises.dto.EmployeeDTO;
+import com.tatastrive.erp.JAM.Enterprises.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+
 public class EmployeeServiceImplementation implements EmployeeService {
+
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     @Autowired
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Employee createEmployee(Employee employee) {
-        return employeeRepository.save(employee);
+    public EmployeeDTO createEmployee(Employee employee) {
+        Employee savedEmployee = employeeRepository.save(employee);
+        return employeeMapper.toDTO(savedEmployee);
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeRepository.findAll()
+                .stream()
+                .map(employeeMapper::toDTO)
+                .toList();
     }
 
     @Override
-    public Employee getEmployeeById(Long id) {
-        return employeeRepository.findById(id).orElse(null);
+    public EmployeeDTO getEmployeeById(Long id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee Not Found"));
+        return employeeMapper.toDTO(employee);
     }
 
     @Override
-    public Employee updateEmployee(Long id, Employee employee) {
+    public EmployeeDTO updateEmployee(Long id, Employee employee) {
 
-        Employee existingEmployee = employeeRepository.findById(id).orElse(null);
+        Employee existingEmployee =
+               employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee Not Found"));
 
-        if(existingEmployee!=null){
+
+
             existingEmployee.setEmployeeName(employee.getEmployeeName());
             existingEmployee.setEmail(employee.getEmail());
             existingEmployee.setPhoneNumber(employee.getPhoneNumber());
@@ -42,14 +57,17 @@ public class EmployeeServiceImplementation implements EmployeeService {
             existingEmployee.setJoiningDate(employee.getJoiningDate());
             existingEmployee.setDepartment(employee.getDepartment());
             existingEmployee.setAssets(employee.getAssets());
-            return employeeRepository.save(existingEmployee);
-        }
-        return null;
+        Employee updatedEmployee = employeeRepository.save(existingEmployee);
+
+        return employeeMapper.toDTO(updatedEmployee);
     }
 
     @Override
     public void deleteEmployee(Long id) {
-        employeeRepository.deleteById(id);
+      Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Project Not Found"));
+
+        employeeRepository.delete(employee);
 
     }
 }
