@@ -1,5 +1,6 @@
 package com.tatastrive.erp.JAM.Enterprises.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,7 +36,7 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
-
+@JsonIgnore
     @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true)
      private List<Asset> assets;
         // Getters and Setters
