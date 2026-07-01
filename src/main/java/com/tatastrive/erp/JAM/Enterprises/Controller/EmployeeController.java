@@ -20,22 +20,14 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @PostMapping("/add")
-   public ResponseEntity<ApiResponse> saveEmployee(@RequestBody Employee employee){
-        EmployeeDTO savedEmployee = employeeService.createEmployee(employee);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new ApiResponse("Employee Saved Successfully", savedEmployee));
+    @PostMapping
+    public Employee createEmployee(@RequestBody Employee employee) {
+        return employeeService.createEmployee(employee);
     }
 
-    @GetMapping("/getall")
-    public ResponseEntity<ApiResponse> getAllEmployee() {
-        try {
-            List<EmployeeDTO> employee= employeeService.getAllEmployees();
-            return ResponseEntity.ok(new ApiResponse("Sucess",employee));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse(e.getMessage(),null));
-        }
+    @GetMapping
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
     }
 
     @GetMapping("/{id}")
